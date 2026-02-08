@@ -1,0 +1,76 @@
+name: ArenaCore
+version: 2.0.0
+main: com.arenacore.ArenaCore
+api-version: '1.21'
+author: ArenaCore Team
+description: High-performance Free-For-All arena system
+
+depend:
+  - FastAsyncWorldEdit
+
+softdepend:
+  - PlaceholderAPI
+
+commands:
+  arena:
+    description: Main arena management command
+    usage: /<command> [subcommand] [args]
+    aliases: [arenas, ac, ffa]
+
+  spawn:
+    description: Teleport to lobby spawn
+    usage: /<command>
+    aliases: [lobby, hub]
+
+  back:
+    description: Return to death location in arena
+    usage: /<command>
+    aliases: [return]
+
+permissions:
+  arena.*:
+    description: Grants all arena permissions
+    default: op
+    children:
+      arena.admin: true
+      arena.create: true
+      arena.delete: true
+      arena.send: true
+      arena.regen: true
+
+  arena.admin:
+    description: Full administrative access
+    default: op
+    children:
+      arena.create: true
+      arena.delete: true
+      arena.send: true
+      arena.regen: true
+
+  arena.create:
+    description: Permission to create arenas
+    default: op
+
+  arena.delete:
+    description: Permission to delete arenas
+    default: op
+
+  arena.send:
+    description: Permission to send players to arenas
+    default: op
+
+  arena.regen:
+    description: Permission to manually regenerate arenas
+    default: op
+
+  arena.spawn:
+    description: Permission to use /spawn
+    default: true
+
+  arena.back:
+    description: Permission to use /back
+    default: true
+
+  # Dynamic arena join permissions
+  # arena.join.<arena_name> - Set per arena
+  # Example: arena.join.nodebuff

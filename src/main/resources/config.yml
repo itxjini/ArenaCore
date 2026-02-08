@@ -1,0 +1,180 @@
+# ╔═══════════════════════════════════════╗
+# ║     ArenaCore FFA Configuration        ║
+# ║    Free-For-All Arena System           ║
+# ╚═══════════════════════════════════════╝
+
+spawn:
+  delay: 3  # Delay in seconds before teleporting (0 = instant)
+
+  clear-inventory: false  # Clear inventory when teleporting to spawn
+
+  messages:
+    teleporting: "&7Teleporting to spawn in &e{time} &7seconds..."
+    move-cancel: "&cTeleport cancelled - you moved!"
+    success: "&aYou've been teleported to spawn!"
+
+# Death Animation & Effects
+death:
+  animation:
+    enabled: true
+    lightning: true
+    freeze-duration: 20  # Ticks (1 second = 20 ticks)
+
+  title:
+    enabled: true
+    text: "&c&lYOU DIED"
+    subtitle: "&7Respawning..."
+
+# Respawn Behavior
+respawn:
+  # Options: LOBBY, GUI, CENTER, SAME_SPAWN
+  # LOBBY - Send to lobby spawn
+  # GUI - Open spawn selection GUI (or center if only one spawn)
+  # CENTER - Always respawn at center
+  # SAME_SPAWN - Respawn at same spawn they died at
+  behavior: GUI
+
+  # Ticks before timeout (GUI only)
+  gui-timeout: 100
+
+  timeout-message: "&7No spawn selected - sending to center"
+
+back:
+  enabled: true
+  cooldown: 120  # Cooldown in seconds (0 = no cooldown)
+
+  messages:
+    no-data: "&cYou have no recent arena death!"
+    expired: "&cYour death location has expired!"
+    cooldown: "&cYou can use /back in &e{time}"
+    arena-unavailable: "&cThat arena is no longer available!"
+    success: "&aReturned to &e{arena}&a!"
+
+# Arena Messages
+arena:
+  messages:
+    join: "&7Entered &e{arena} &7at &e{spawn} &7spawn"
+    leave: "&7Left arena &e{arena}"
+    no-permission: "&cYou don't have permission to enter this arena!"
+    disabled: "&cThis arena is currently disabled!"
+
+# Arena Default Settings
+arena-defaults:
+  clear-inventory: true
+  reset-health: true
+  reset-hunger: true
+  gamemode-override: SURVIVAL
+  rekit-on-kill: true
+  enabled: true
+
+# Regeneration Defaults
+regeneration:
+  default-mode: SMART  # DISABLED, TIMER, SMART
+  default-delay: 300   # Seconds (TIMER mode)
+  default-surface-threshold: 0.40  # 40% (SMART mode)
+  default-display: ACTIONBAR  # ACTIONBAR, BOSSBAR, TITLE, NONE
+
+# Performance Settings
+performance:
+  # Number of async threads for regeneration
+  async-threads: 4
+
+  # Maximum concurrent regenerations
+  max-concurrent-regens: 3
+
+  # Scheduler tick interval (20 = 1 second)
+  scheduler-interval: 20
+
+  # PlaceholderAPI cache duration in milliseconds
+  placeholder-cache-duration: 1000
+
+# ===================================
+# Per-Arena Configuration (arenas/*.yml)
+# ===================================
+# Each arena has its own config file in /arenas/ folder
+#
+# Example: arenas/ffa.yml
+#
+# name: "ffa"
+# world: "world"
+# enabled: true
+# permission: null  # or "vip" for arena.join.vip
+#
+# spawns:
+#   center:
+#     world: "world"
+#     x: 100.5
+#     y: 64.0
+#     z: 200.5
+#     yaw: 90.0
+#     pitch: 0.0
+#   named:
+#     mid:
+#       world: "world"
+#       x: 110.5
+#       y: 70.0
+#       z: 200.5
+#       yaw: 180.0
+#       pitch: 0.0
+#     tower:
+#       world: "world"
+#       x: 90.5
+#       y: 80.0
+#       z: 200.5
+#       yaw: 0.0
+#       pitch: 0.0
+#
+# gui:
+#   title: "&c&lFFA Spawn Selector"
+#   rows: 3
+#   fill-item:
+#     material: BLACK_STAINED_GLASS_PANE
+#   spawns:
+#     mid:
+#       slot: 11
+#       material: DIAMOND_SWORD
+#       name: "&c&lMid Spawn"
+#       lore:
+#         - "&7Teleport to the middle"
+#         - "&7of the arena"
+#     tower:
+#       slot: 15
+#       material: BOW
+#       name: "&a&lTower Spawn"
+#       lore:
+#         - "&7Teleport to the tower"
+#
+# settings:
+#   clear-inventory: true
+#   reset-health: true
+#   reset-hunger: true
+#   gamemode-override: SURVIVAL
+#   rekit-on-kill: true
+#
+# kit:
+#   items:
+#     - material: DIAMOND_SWORD
+#       amount: 1
+#       slot: 0
+#       name: "&cFFA Sword"
+#     - material: BOW
+#       amount: 1
+#       slot: 1
+#     - material: ARROW
+#       amount: 64
+#       slot: 9
+#
+# effects:
+#   SPEED:
+#     level: 1
+#     duration: -1  # -1 = infinite
+#   JUMP_BOOST:
+#     level: 0
+#     duration: -1
+#
+# regen:
+#   enabled: true
+#   mode: SMART
+#   delay: 300
+#   surface-threshold: 0.40
+#   display: ACTIONBAR
